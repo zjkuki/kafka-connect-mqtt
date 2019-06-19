@@ -27,15 +27,15 @@ public class MqttSourceConnectorTest {
 
         mSourceProperties = new HashMap<>();
 
-        mSourceProperties.put(MqttSourceConstant.KAFKA_TOPIC, "kafka_topic");
+        mSourceProperties.put(MqttSourceConstant.KAFKA_TOPIC, "mqtt");
 
         mSourceProperties.put(MqttSourceConstant.MQTT_CLEAN_SESSION, "true");
         mSourceProperties.put(MqttSourceConstant.MQTT_CLIENT_ID, "TesetClientId");
         mSourceProperties.put(MqttSourceConstant.MQTT_CONNECTION_TIMEOUT, "15");
         mSourceProperties.put(MqttSourceConstant.MQTT_KEEP_ALIVE_INTERVAL, "30");
         mSourceProperties.put(MqttSourceConstant.MQTT_QUALITY_OF_SERVICE, "2");
-        mSourceProperties.put(MqttSourceConstant.MQTT_SERVER_URIS, "tcp://127.0.0.1:1883");
-        mSourceProperties.put(MqttSourceConstant.MQTT_TOPIC, "mqtt_topic");
+        mSourceProperties.put(MqttSourceConstant.MQTT_SERVER_URIS, "tcp://mqtt.xuanma.tech:1883");
+        mSourceProperties.put(MqttSourceConstant.MQTT_TOPIC, "test");
     }
 
     @Test
@@ -50,15 +50,15 @@ public class MqttSourceConnectorTest {
 
         assertEquals(taskConfigs.size(), 1);
 
-        assertEquals(taskConfigs.get(0).get(MqttSourceConstant.KAFKA_TOPIC), "kafka_topic");
+        assertEquals(taskConfigs.get(0).get(MqttSourceConstant.KAFKA_TOPIC), "mqtt");
         assertEquals(taskConfigs.get(0).get(MqttSourceConstant.MQTT_CLEAN_SESSION), "true");
         assertEquals(taskConfigs.get(0).get(MqttSourceConstant.MQTT_CLIENT_ID), "TesetClientId");
         assertEquals(taskConfigs.get(0).get(MqttSourceConstant.MQTT_CONNECTION_TIMEOUT), "15");
         assertEquals(taskConfigs.get(0).get(MqttSourceConstant.MQTT_KEEP_ALIVE_INTERVAL), "30");
         assertEquals(taskConfigs.get(0).get(MqttSourceConstant.MQTT_QUALITY_OF_SERVICE), "2");
         assertEquals(taskConfigs.get(0).get(MqttSourceConstant.MQTT_SERVER_URIS),
-                "tcp://127.0.0.1:1883");
-        assertEquals(taskConfigs.get(0).get(MqttSourceConstant.MQTT_TOPIC), "mqtt_topic");
+                "tcp://mqtt.xuanma.tech:1883");
+        assertEquals(taskConfigs.get(0).get(MqttSourceConstant.MQTT_TOPIC), "test");
 
     }
 
