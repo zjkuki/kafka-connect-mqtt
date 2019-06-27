@@ -23,7 +23,14 @@ public class MqttSourceInterceptMessage {
         return mTopic;
     }
 
-    public byte[] getMessage() {
+    /*public byte[] getMessage() {
         return mMessage.getPayload();
+    }*/
+    public String getMessage() {
+        try {
+            return new String((byte[]) mMessage.getPayload(), "UTF-8");
+        }catch (Exception e){
+            return "";
+        }
     }
 }
