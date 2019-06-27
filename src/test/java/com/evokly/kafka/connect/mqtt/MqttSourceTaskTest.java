@@ -88,4 +88,16 @@ public class MqttSourceTaskTest {
         // empty queue
         assertEquals(mTask.mQueue.size(), 0);
     }
+
+    @Test
+    public void testPoll2() throws Exception {
+        MqttMessage mqttMessage = new MqttMessage();
+        while (true) {
+            mTask.messageArrived("mqtt",mqttMessage);
+            // generate and validate SourceRecord
+            List<SourceRecord> sourceRecords = mTask.poll();
+
+            System.out.println(new String((byte[]) sourceRecords.get(0).value(), "UTF-8"));
+        }
+    }
 }
