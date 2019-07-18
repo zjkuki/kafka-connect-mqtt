@@ -41,6 +41,8 @@ public class MqttSourceTaskTest {
         mSourceProperties.put(MqttSourceConstant.MQTT_KEEP_ALIVE_INTERVAL, "30");
         mSourceProperties.put(MqttSourceConstant.MQTT_QUALITY_OF_SERVICE, "2");
         mSourceProperties.put(MqttSourceConstant.MQTT_SERVER_URIS, "tcp://mqtt.xuanma.tech:1883");
+        mSourceProperties.put(MqttSourceConstant.MQTT_USERNAME, "kuki");
+        mSourceProperties.put(MqttSourceConstant.MQTT_PASSWORD, "123123");
         mSourceProperties.put(MqttSourceConstant.MQTT_TOPIC, "test");
         mConnector.start(mSourceProperties);
         List<Map<String, String>> taskConfigs = mConnector.taskConfigs(1);
@@ -92,12 +94,22 @@ public class MqttSourceTaskTest {
     @Test
     public void testPoll2() throws Exception {
         MqttMessage mqttMessage = new MqttMessage();
+
         while (true) {
-            mTask.messageArrived("mqtt",mqttMessage);
+            mTask.messageArrived("test",mqttMessage);
+
             // generate and validate SourceRecord
             List<SourceRecord> sourceRecords = mTask.poll();
 
-            System.out.println(new String((byte[]) sourceRecords.get(0).value(), "UTF-8"));
+            String val = new String((byte[]) sourceRecords.get(0).value(), "UTF-8");
+
+            if(val=="") {
+                System.out.println(val);
+            }else{
+                System.out.println("Watting for mqtt messages");
+            }
+
+            Thread.sleep(500);
         }
     }
 }
